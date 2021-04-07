@@ -21,9 +21,9 @@ exports.up = async (knex) => {
       table.string('crime_data');
       table.string('industries');
       table.string('demographic');
-      table.string('crime_graph');
+      table.jsonb('crime_graph');
       table.string('air_quality');
-      table.string('employment_graph');
+      table.jsonb('employment_graph');
       table.primary(['city.cities', 'state.cities']);
     });
   }

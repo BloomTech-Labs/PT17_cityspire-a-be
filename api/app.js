@@ -23,6 +23,10 @@ const indexRouter = require('./index/indexRouter');
 const cityRouter = require('./city/cityRouter');
 const profileRouter = require('./profile/profileRouter');
 const dsRouter = require('./dsService/dsRouter');
+const indeedRouter = require('./indeed/indeedRouter');
+const weatherRouter = require('./weather/weatherRouter');
+const visualizasionsRouter = require('./visualizations/visualizationsRouter');
+const zillowRouter = require('./zillow/zillowRouter');
 
 const app = express();
 
@@ -52,6 +56,10 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use(['/city', '/cities'], cityRouter);
 app.use(['/profile', '/profiles'], profileRouter);
+app.use(['/indeed', '/jobs'], indeedRouter);
+app.use(['/weather'], weatherRouter);
+app.use(['/visualizasions'], visualizasionsRouter);
+app.use(['/zillow'], zillowRouter);
 
 app.use('/data', dsRouter);
 
