@@ -27,6 +27,7 @@ const indeedRouter = require('./indeed/indeedRouter');
 const weatherRouter = require('./weather/weatherRouter');
 const visualizasionsRouter = require('./visualizations/visualizationsRouter');
 const zillowRouter = require('./zillow/zillowRouter');
+const schoolRouter = require('./schools/schoolsRouter');
 
 const app = express();
 
@@ -60,6 +61,7 @@ app.use(['/indeed', '/jobs'], indeedRouter);
 app.use(['/weather'], weatherRouter);
 app.use(['/visualizasions'], visualizasionsRouter);
 app.use(['/zillow'], zillowRouter);
+app.use(['/schools'], schoolRouter);
 
 app.use('/data', dsRouter);
 
