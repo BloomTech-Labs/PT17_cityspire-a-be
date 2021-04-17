@@ -1,6 +1,6 @@
 const express = require('express');
 // const authRequired = require('../middleware/authRequired');
-const Visualizasions = require('./visualizationsModel');
+const Visualizasions = require('./visualizationsModel.js');
 const router = express.Router();
 
 router.get('/', function (req, res) {

@@ -5,29 +5,29 @@ const findAll = async () => {
 };
 
 const findBy = (filter) => {
-  return db('visualizasions').where(filter);
+  return db('visualizations').where(filter);
 };
 
 const findById = async (id) => {
-  return db('visualizasions').where({ id }).first();
+  return db('visualizations').where({ id }).first();
 };
 
-async function add(visualizasions) {
-  const [id] = await db('visualizasions').insert(visualizasions, 'id');
-  return db('visualizasions').where({ id }).first();
+async function add(visualizations) {
+  const [id] = await db('visualizations').insert(visualizations, 'id');
+  return db('visualizations').where({ id }).first();
 }
 
-const update = (id, visualizasions) => {
-  console.log(visualizasions);
-  return db('visualizasions')
+const update = (id, visualizations) => {
+  console.log(visualizations);
+  return db('visualizations')
     .where({ id: id })
     .first()
-    .update(visualizasions)
+    .update(visualizations)
     .returning('*');
 };
 
 const remove = async (id) => {
-  return await db('visualizasions').where({ id }).del();
+  return await db('visualizations').where({ id }).del();
 };
 
 module.exports = {
