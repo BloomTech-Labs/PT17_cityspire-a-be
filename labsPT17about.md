@@ -20,4 +20,4 @@ Axios allows chaining in addition to Knex's own chaining, and should work with a
 
 ## Tests
 
-After setting up the requisite calls, tests should be a breeze to write out with little to no issue.
+After setting up the requisit calls, tests should be a breeze to write out with little to no issue.
