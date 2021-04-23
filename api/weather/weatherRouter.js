@@ -1,7 +1,23 @@
 const express = require('express');
-// const authRequired = require('../middleware/authRequired');
+const authRequired = require('../middleware/authRequired');
 const Weather = require('./weatherModel');
 const router = express.Router();
+
+router.post('/', authRequired, (req, res) => {
+  const weatherInfo = req.body;
+  Weather.add(weatherInfo)
+    .then((weather) => {
+      res.status(201).json(weather);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error:
+          'There was an error while saving the weather for the city to the database: ',
+        err,
+      });
+    });
+});
 
 router.get('/', function (req, res) {
   Weather.findAll()

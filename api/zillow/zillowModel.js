@@ -18,7 +18,6 @@ async function add(zillow) {
 }
 
 const update = (id, zillow) => {
-  console.log(zillow);
   return db('zillow').where({ id: id }).first().update(zillow).returning('*');
 };
 

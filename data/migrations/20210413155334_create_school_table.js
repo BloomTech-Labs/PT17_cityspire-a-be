@@ -17,12 +17,7 @@ exports.up = async (knex) => {
         .inTable('cities')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-      table.string('school');
-      table.string('score');
-      table.int('rating');
-      table.string('address');
-      table.string('studentsPerTeacher');
-      table.string('district');
+      table.jsonb('list');
       table.primary(['city.cities', 'state.cities']);
     });
   }

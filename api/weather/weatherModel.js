@@ -18,7 +18,6 @@ async function add(weather) {
 }
 
 const update = (id, weather) => {
-  console.log(weather);
   return db('weather').where({ id: id }).first().update(weather).returning('*');
 };
 

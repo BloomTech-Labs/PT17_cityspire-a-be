@@ -5,7 +5,7 @@ const findAll = async () => {
 };
 
 const findBy = (filter) => {
-  return db('cities').where(filter);
+  return db('cities').where(filter).orderBy('id');
 };
 
 const findById = async (id) => {
@@ -18,7 +18,6 @@ async function add(city) {
 }
 
 const update = (id, city) => {
-  console.log(city);
   return db('cities').where({ id: id }).first().update(city).returning('*');
 };
 

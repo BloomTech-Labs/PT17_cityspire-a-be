@@ -17,8 +17,16 @@ exports.up = async (knex) => {
         .inTable('cities')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-      table.float('homeValueIndex');
-      table.float('homeValueIndex1-YrChange');
+      table.string('lat');
+      table.string('lon');
+      table.string('street address');
+      table.string('bedrooms');
+      table.string('bathrooms');
+      table.bool('cats allowed');
+      table.bool('dogs allowed');
+      table.string('list price');
+      table.string('ammenities');
+      table.string('photos');
       table.primary(['city.cities', 'state.cities']);
     });
   }

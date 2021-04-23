@@ -1,7 +1,23 @@
 const express = require('express');
-// const authRequired = require('../middleware/authRequired');
+const authRequired = require('../middleware/authRequired');
 const Visualizations = require('./visualizationsModel.js');
 const router = express.Router();
+
+router.post('/', authRequired, (req, res) => {
+  const visInfo = req.body;
+  Visualizations.add(visInfo)
+    .then((vis) => {
+      res.status(201).json(vis);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error:
+          'There was an error while saving the visualizations to the database: ',
+        err,
+      });
+    });
+});
 
 router.get('/', function (req, res) {
   Visualizations.findAll()

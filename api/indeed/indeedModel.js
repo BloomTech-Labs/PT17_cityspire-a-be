@@ -18,7 +18,6 @@ async function add(indeed) {
 }
 
 const update = (id, indeed) => {
-  console.log(indeed);
   return db('indeed').where({ id: id }).first().update(indeed).returning('*');
 };
 
