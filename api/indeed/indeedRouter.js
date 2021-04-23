@@ -1,9 +1,24 @@
 const express = require('express');
-// const authRequired = require('../middleware/authRequired');
+const authRequired = require('../middleware/authRequired');
 const Indeed = require('./indeedModel');
 const router = express.Router();
 
-router.get('/', function (req, res) {
+router.post('/', authRequired, (req, res) => {
+  const jobInfo = req.body;
+  Indeed.add(jobInfo)
+    .then((job) => {
+      res.status(201).json(job);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: 'There was an error while saving the job to the database: ',
+        err,
+      });
+    });
+});
+
+router.get('/', (req, res) => {
   Indeed.findAll()
     .then((indeed) => {
       res.status(200).json(indeed);
@@ -14,8 +29,8 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/:id', function (req, res) {
-  const id = String(req.params.id);
+router.get('/:id', (req, res) => {
+  const { id } = req.params.id;
   Indeed.findById(id)
     .then((indeed) => {
       if (indeed) {
@@ -29,7 +44,7 @@ router.get('/:id', function (req, res) {
     });
 });
 
-router.put('/', function (req, res) {
+router.put('/', (req, res) => {
   const indeed = req.body;
   if (indeed) {
     const id = indeed.id || 0;
@@ -55,7 +70,7 @@ router.put('/', function (req, res) {
   }
 });
 
-router.delete('/:id', function (req, res) {
+router.delete('/:id', (req, res) => {
   const id = req.params.id;
   try {
     Indeed.findById(id).then((indeed) => {

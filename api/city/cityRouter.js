@@ -1,9 +1,24 @@
 const express = require('express');
-// const authRequired = require('../middleware/authRequired');
+const authRequired = require('../middleware/authRequired');
 const Cities = require('./cityModel');
 const router = express.Router();
 
-router.get('/', function (req, res) {
+router.post('/', authRequired, (req, res) => {
+  const cityInfo = req.body;
+  Cities.add(cityInfo)
+    .then((city) => {
+      res.status(201).json(city);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: 'There was an error while saving the city to the database: ',
+        err,
+      });
+    });
+});
+
+router.get('/', (req, res) => {
   Cities.findAll()
     .then((cities) => {
       res.status(200).json(cities);
@@ -14,8 +29,8 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/:id', function (req, res) {
-  const id = String(req.params.id);
+router.get('/:id', (req, res) => {
+  const { id } = req.params.id;
   Cities.findById(id)
     .then((city) => {
       if (city) {
@@ -29,7 +44,7 @@ router.get('/:id', function (req, res) {
     });
 });
 
-router.put('/', function (req, res) {
+router.put('/', (req, res) => {
   const city = req.body;
   if (city) {
     const id = city.id || 0;
@@ -55,7 +70,7 @@ router.put('/', function (req, res) {
   }
 });
 
-router.delete('/:id', function (req, res) {
+router.delete('/:id', (req, res) => {
   const id = req.params.id;
   try {
     Cities.findById(id).then((city) => {

@@ -12,13 +12,13 @@ const findById = async (id) => {
   return db('schools').where({ id }).first();
 };
 
-async function add(schools) {
-  const [id] = await db('schools').insert(schools, 'id');
+async function add(school) {
+  const [id] = await db('schools').insert(school, 'id');
   return db('schools').where({ id }).first();
 }
 
-const update = (id, schools) => {
-  return db('schools').where({ id: id }).first().update(schools).returning('*');
+const update = (id, school) => {
+  return db('schools').where({ id: id }).first().update(school).returning('*');
 };
 
 const remove = async (id) => {

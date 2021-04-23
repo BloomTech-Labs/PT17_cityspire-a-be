@@ -12,13 +12,12 @@ const findById = async (id) => {
   return db('visualizations').where({ id }).first();
 };
 
-async function add(visualizations) {
-  const [id] = await db('visualizations').insert(visualizations, 'id');
+async function add(vis) {
+  const [id] = await db('visualizations').insert(vis, 'id');
   return db('visualizations').where({ id }).first();
 }
 
 const update = (id, visualizations) => {
-  console.log(visualizations);
   return db('visualizations')
     .where({ id: id })
     .first()

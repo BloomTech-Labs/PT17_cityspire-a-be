@@ -1,7 +1,22 @@
 const express = require('express');
-// const authRequired = require('../middleware/authRequired');
+const authRequired = require('../middleware/authRequired');
 const Schools = require('./schoolsModel');
 const router = express.Router();
+
+router.post('/', authRequired, (req, res) => {
+  const schoolInfo = req.body;
+  Schools.add(schoolInfo)
+    .then((school) => {
+      res.status(201).json(school);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: 'There was an error while saving the school to the database: ',
+        err,
+      });
+    });
+});
 
 router.get('/', function (req, res) {
   Schools.findAll()

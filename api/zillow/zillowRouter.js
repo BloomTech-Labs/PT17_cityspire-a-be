@@ -1,7 +1,22 @@
 const express = require('express');
-// const authRequired = require('../middleware/authRequired');
+const authRequired = require('../middleware/authRequired');
 const Zillow = require('./zillowModel');
 const router = express.Router();
+
+router.post('/', authRequired, (req, res) => {
+  const rentInfo = req.body;
+  Zillow.add(rentInfo)
+    .then((rent) => {
+      res.status(201).json(rent);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: 'There was an error while saving the rental to the database: ',
+        err,
+      });
+    });
+});
 
 router.get('/', function (req, res) {
   Zillow.findAll()
